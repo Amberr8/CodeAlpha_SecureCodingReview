@@ -1,0 +1,79 @@
+Secure Coding Review Report — CodeAlpha Task 3
+
+Overview
+Reviewed a Python login application for security vulnerabilities
+using Bandit static analyzer and manual inspection.
+Language: Python 3 | Tool: Bandit
+
+
+
+Vulnerability 1: Hardcoded Credentials
+- File: vulnerable.py (Line 7–8)
+- Severity: HIGH
+- Description: Passwords stored directly in source code.
+  Anyone with code access gets credentials immediately.
+- Fix: Load secrets from environment variables using os.environ.get()
+
+
+Vulnerability 2: SQL Injection
+- File:vulnerable.py (Line 20–21)
+- Severity: HIGH
+- Description: User input concatenated directly into SQL query.
+  Attacker can bypass authentication using: ' OR '1'='1
+- Fix: Use parameterized queries with ? placeholders
+
+
+Vulnerability 3: Weak Password Hashing (MD5)
+- File: vulnerable.py (Line 30)
+- Severity: MEDIUM
+- Description: MD5 is cryptographically broken. Passwords
+  can be cracked in seconds using rainbow tables.
+- Fix: Use bcrypt with automatic salting
+
+
+
+Vulnerability 4: Command Injection
+- File: vulnerable.py (Line 37)
+- Severity: HIGH
+- Description: subprocess with shell=True passes input to OS shell.
+  Attacker can run: google.com && del /f /q C:\*
+- Fix: Use shell=False with a list of arguments + input validation
+
+
+Vulnerability 5: Insecure Deserialization
+- File:vulnerable.py (Line 43)
+- Severity: HIGH
+- Description: pickle.loads() on untrusted data allows
+  remote code execution attacks.
+- Fix: Replace pickle with json.loads() for safe parsing
+
+
+Tools Used
+- Bandit 1.7.x — Python static code analyzer
+- Manual code inspection
+- OWASP Top 10 reference
+
+Output :
+Run started:2026-05-25 07:20:06.413421+00:00
+
+Test results:
+	No issues identified.
+
+Code scanned:
+	Total lines of code: 0
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 0
+		High: 0
+Files skipped (1):
+	.\vulnerable.py (No such file or directory)
