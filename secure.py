@@ -4,7 +4,7 @@ import subprocess
 import os
 import bcrypt # For secure password hashing
 
-# FIX 1: No hardcoded credentials — load from environment variables
+# FIX 1: No hardcoded credentials  load from environment variables
 SECRET_KEY = os.environ.get("SECRET_KEY", "change-this-in-production")
 
 def get_db_connection(): # Connect to the SQLite database (or create it if it doesn't exist)
