@@ -47,6 +47,21 @@ Vulnerability 5: Insecure Deserialization
   remote code execution attacks.
 - Fix: Replace pickle with json.loads() for safe parsing
 
+## Security Vulnerabilities Found
+
+The following table summarizes the issues identified during the code review:
+
+| Issue ID | Vulnerability                              | Severity | CWE       |
+|----------|--------------------------------------------|----------|-----------|
+| 1        | B105 Hardcoded password admin123           | Low      | CWE-259   |
+| 2        | B105 Hardcoded password root1234           | Low      | CWE-259   |
+| 3        | B608 SQL Injection via string query        | Medium   | CWE-89    |
+| 4        | B324 Weak MD5 hash                         | High     | CWE-327   |
+| 5        | B602 subprocess shell=True                 | High     | CWE-78    |
+| 6        | B301 pickle.loads insecure                 | Medium   | CWE-502   |
+| 7        | B404 subprocess import risk                | Low      | CWE-788   |
+| 8        | B403 pickle import risk                    | Low      | CWE-502   |
+
 
 Tools Used
 - Bandit 1.7.x — Python static code analyzer
