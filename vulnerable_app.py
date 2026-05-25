@@ -25,7 +25,7 @@ def login(username, password): # User input is directly concatenated into the SQ
     conn.close()
     return result
 
-# VULNERABILITY 3: Weak password hashing (MD5)
+# VULNERABILITY 3: Weak password hashing 
 def register(username, password):
     conn = get_db_connection()
     # MD5 is broken and easily cracked
